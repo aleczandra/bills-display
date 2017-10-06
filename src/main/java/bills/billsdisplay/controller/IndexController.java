@@ -24,4 +24,10 @@ public class IndexController {
         String s = billsReader.performSearch();
         return s;
     }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String itWorks() throws IOException {
+        return "It works Ta na na na!";
+    }
+
 }

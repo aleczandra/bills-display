@@ -16,7 +16,7 @@ public class ElasticClient {
     public static final String PASSWORD = "changeme";
 
     public static RestClient createClient() {
-        return createClient(new HttpHost("localhost", 9200),
+        return createClient(new HttpHost("elastic", 9200),
             new UsernamePasswordCredentials("elastic", "changeme"));
     }
 
