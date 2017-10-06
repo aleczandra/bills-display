@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  zookeeper:
+    image: zookeeper:3.4
+    ports:
+      - 2181:2181
+  kafka:
+    image: ches/kafka:latest
+    ports:
+      - 9092:9092
+    links:
+      - zookeeper:3.4
+    environment:
+      ZOOKEEPER_IP: zookeeper
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+
+volumes:
+  esdata:
+    driver: local
+
+

@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  zookeeper:
+    image: zookeeper:3.4
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+    
+  kafka:
+    image: ches/kafka:latest
+    hostname: kafka
+    ports:
+      - 9092:9092
+    links:
+      - zookeeper:3.4
+      - elastic
+    environment:
+      ZOOKEEPER_IP: zookeeper
+      KAFKA_ADVERTISED_HOST_NAME: 172.17.0.1
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.1
+    hostname: elastic
+    container_name: elastic
+    environment:
+      cluster.name: bills-processer
+    ports:
+      - 9200:9200
+      - 9300:9300
+  processer:
+    image: processer
+    hostname: processer
+    links:
+      - kafka
+
+  display:
+    image: billdisplay
+    hostname: display
+    ports:
+      - "8080:8080"
+    links:
+      - processer
+      
+
