@@ -57,7 +57,8 @@ Then access everything at: http://localhost:8080/index/bills
 
 
 
-MAC problem:
+--------------------------------------------------------MAC problem----------------------------------------------------------
+
 On MAC the producer and the consumer containers could not process information from the kafka queue, because they could not connect to the broadcast server. Didn't know exactly which IP has to be specified as the broadcast server.
 
 This post https://github.com/wurstmeister/kafka-docker/issues/169 has the solution. The solution from hung-phan worked out for me. 
